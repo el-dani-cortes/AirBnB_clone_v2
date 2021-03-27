@@ -129,7 +129,7 @@ class HBNBCommand(cmd.Cmd):
             if atr[1][0] == '"':
                 atr[1] = atr[1][1:-1].replace('"', '\\"')
                 atr[1] = atr[1].replace("_", " ")
-            elif atr[1].isdecimal == True:
+            elif atr[1].isdecimal is True:
                 atr[1] = Int(atr[1])
             else:
                 try:
