@@ -1,4 +1,4 @@
--- Prepares a MySQL server with specific parameters
+-- Prepares a MySQL server with specific parameters for hbnb_dev
 -- Creates db hbnb_dev_db
 CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
 -- Creates user 'hbnb_dev' if doesn't exist
