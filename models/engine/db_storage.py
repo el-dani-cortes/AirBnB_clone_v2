@@ -44,12 +44,13 @@ class DBStorage:
     def all(self, cls=None):
         """Method to query all objects depending of the class"""
         classes = [User, Place, State, City, Amenity, Review]
+        dictionary = {}
 
         if cls == None:
+            for 
             query = self.__session.query(*classes).all()
         else:
             query = self.__session.query(cls).all()
-        dictionary = {}
         for obj in query:
             obj_dict = obj.to_dict
             for key, val in obj_dict:
