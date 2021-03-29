@@ -5,6 +5,7 @@ import models
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
+from os import getenv
 
 Base = declarative_base()
 
@@ -32,7 +33,14 @@ class BaseModel:
     def __str__(self):
         """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
-        return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
+        if getenv('HBNB_TYPE_STORAGE') != 'db':
+            return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
+        else:
+            dictionary = {}
+            for key, val in self.__dict__.items():
+                dictionary[key] = val
+            dictionary.pop('_sa_instance_state', None)
+            return '[{}] ({}) {}'.format(cls, self.id, dictionary)
 
     def save(self):
         """Updates updated_at with current time when instance is changed"""
