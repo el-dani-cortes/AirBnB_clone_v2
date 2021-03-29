@@ -2,8 +2,8 @@
 """
 Script that creates a new engine to communicate with database
 """
-from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import (create_engine)
+from sqlalchemy.orm import sessionmaker, scoped_session
 import os
 from models.base_model import BaseModel, Base
 from models.user import User
@@ -43,18 +43,19 @@ class DBStorage:
 
     def all(self, cls=None):
         """Method to query all objects depending of the class"""
-        classes = [User, Place, State, City, Amenity, Review]
+
+        classes = ['User', 'Place', 'State', 'City', 'Amenity', 'Review']
         dictionary = {}
 
         if cls == None:
-            for 
-            query = self.__session.query(*classes).all()
+            for _class in classes:
+                result = self.__session.query(eval(_class)).all()
+                for obj in result:
+                    dictionary[obj.__class__.__name__+ '.' + obj.id] = obj
         else:
-            query = self.__session.query(cls).all()
-        for obj in query:
-            obj_dict = obj.to_dict
-            for key, val in obj_dict:
-                dictionary[key] = eval(val["__class__"])(**val)
+            result = self.__session.query(eval(cls)).all()
+            for obj in result:
+                dictionary[obj.__class__.__name__+ '.' + obj.id] = obj
         return dictionary
 
     def new(self, obj):
