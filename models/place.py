@@ -6,6 +6,7 @@ from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from models.review import Review
 
+
 class Place(BaseModel, Base):
     """ A place to stay """
     if getenv("HBNB_TYPE_STORAGE") == "db":

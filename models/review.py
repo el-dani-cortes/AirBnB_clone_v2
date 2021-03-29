@@ -5,6 +5,7 @@ from os import getenv
 import sqlalchemy
 from sqlalchemy import Column, String, ForeignKey
 
+
 class Review(BaseModel, Base):
     """ Review classto store review information """
     if getenv("HBNB_TYPE_STORAGE") == "db":

@@ -24,20 +24,20 @@ env = {
     "ENV": os.environ.get('HBNB_ENV')
 }
 
+
 class DBStorage:
     """New engine class definition"""
     __engine = None
     __session = None
 
-
     def __init__(self):
         """Constructor for instance of this class"""
-        self.__engine =  create_engine('mysql+mysqldb://{}:{}@{}:3306/{}'
-                                       .format(env['USER'],
-                                               env['PWD'],
-                                               env['HOST'],
-                                               env['DB']),
-                                       pool_pre_ping=True)
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}:3306/{}'
+                                      .format(env['USER'],
+                                              env['PWD'],
+                                              env['HOST'],
+                                              env['DB']),
+                                      pool_pre_ping=True)
         if env['ENV'] == 'test':
             Base.metada.drop_all(self.__engine)
 
@@ -47,15 +47,15 @@ class DBStorage:
         classes = ['User', 'Place', 'State', 'City', 'Amenity', 'Review']
         dictionary = {}
 
-        if cls == None:
+        if cls is None:
             for _class in classes:
                 result = self.__session.query(eval(_class)).all()
                 for obj in result:
-                    dictionary[obj.__class__.__name__+ '.' + obj.id] = obj
+                    dictionary[obj.__class__.__name__ + '.' + obj.id] = obj
         else:
             result = self.__session.query(eval(cls)).all()
             for obj in result:
-                dictionary[obj.__class__.__name__+ '.' + obj.id] = obj
+                dictionary[obj.__class__.__name__ + '.' + obj.id] = obj
         return dictionary
 
     def new(self, obj):
@@ -74,5 +74,6 @@ class DBStorage:
     def reload(self):
         """Create all tables in the database"""
         Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        session_factory = sessionmaker(bind=self.__engine,
+                                       expire_on_commit=False)
         self.__session = scoped_session(session_factory)

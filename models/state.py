@@ -16,6 +16,7 @@ class State(BaseModel, Base):
 
     else:
         name = ""
+
         @property
         def cities(self):
             """Getter for cities using FileStorage
