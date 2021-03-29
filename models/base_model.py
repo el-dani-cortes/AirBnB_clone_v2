@@ -34,7 +34,11 @@ class BaseModel:
         """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
         if getenv('HBNB_TYPE_STORAGE') != 'db':
-            return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
+            dictionary = {}
+            for key, val in self.__dict__.items():
+                dictionary[key] = val
+            dictionary.pop('_sa_instance_state', None)
+            return '[{}] ({}) {}'.format(cls, self.id, dictionary)
         else:
             dictionary = {}
             for key, val in self.__dict__.items():
