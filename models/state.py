@@ -3,6 +3,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
+from models.city import City
 from os import getenv
 
 
@@ -17,7 +18,7 @@ class State(BaseModel, Base):
         name = ""
         @property
         def cities(self):
-            """Getter the cities for FileStorage
+            """Getter for cities using FileStorage
             """
             city_list = []
             for key, val in storage.all(City).items():
