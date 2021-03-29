@@ -56,7 +56,6 @@ class DBStorage:
             result = self.__session.query(eval(cls)).all()
             for obj in result:
                 dictionary[obj.__class__.__name__+ '.' + obj.id] = obj
-        print("--------------------->{}".format(dictionary))
         return dictionary
 
     def new(self, obj):
