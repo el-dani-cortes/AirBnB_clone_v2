@@ -39,7 +39,7 @@ class DBStorage:
                                               env['DB']),
                                       pool_pre_ping=True)
         if env['ENV'] == 'test':
-            Base.metada.drop_all(self.__engine)
+            Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """Method to query all objects depending of the class"""

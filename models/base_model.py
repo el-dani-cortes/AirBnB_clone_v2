@@ -24,11 +24,13 @@ class BaseModel:
         self.updated_at = datetime.now()
         if kwargs:
             if 'updated_at' in kwargs.keys():
-                kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
-                                                         '%Y-%m-%dT%H:%M:%S.%f')
+                kwargs['updated_at'] = datetime.\
+                                       strptime(kwargs['updated_at'],
+                                                '%Y-%m-%dT%H:%M:%S.%f')
             if 'created_at' in kwargs.keys():
-                kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
-                                                         '%Y-%m-%dT%H:%M:%S.%f')
+                kwargs['created_at'] = datetime.\
+                                       strptime(kwargs['created_at'],
+                                                '%Y-%m-%dT%H:%M:%S.%f')
             if '__class__' in kwargs.keys():
                 del kwargs['__class__']
             self.__dict__.update(kwargs)
@@ -36,18 +38,11 @@ class BaseModel:
     def __str__(self):
         """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
-        if getenv('HBNB_TYPE_STORAGE') != 'db':
-            dictionary = {}
-            for key, val in self.__dict__.items():
-                dictionary[key] = val
-            dictionary.pop('_sa_instance_state', None)
-            return '[{}] ({}) {}'.format(cls, self.id, dictionary)
-        else:
-            dictionary = {}
-            for key, val in self.__dict__.items():
-                dictionary[key] = val
-            dictionary.pop('_sa_instance_state', None)
-            return '[{}] ({}) {}'.format(cls, self.id, dictionary)
+        dictionary = {}
+        for key, val in self.__dict__.items():
+            dictionary[key] = val
+        dictionary.pop('_sa_instance_state', None)
+        return '[{}] ({}) {}'.format(cls, self.id, dictionary)
 
     def save(self):
         """Updates updated_at with current time when instance is changed"""

@@ -33,7 +33,8 @@ class Place(BaseModel, Base):
         longitude = Column(Float, nullable=True)
         reviews = relationship("Review", backref="place", cascade="all,delete")
         amenities = relationship("Amenity", secondary=place_amenity,
-                                 viewonly=False, back_populates="place_amenities")
+                                 viewonly=False,
+                                 back_populates="place_amenities")
     else:
         city_id = ""
         user_id = ""
@@ -65,5 +66,6 @@ class Place(BaseModel, Base):
         @amenities.setter
         def amenities(self, amenity):
             """setter amenities ids to Amenity instances"""
-            if self.__class__.__name__ == 'Amenity' and amenity.id not in self.amenity_ids:
+            if self.__class__.__name__ == 'Amenity' and amenity.id\
+               not in self.amenity_ids:
                 self.amenity_ids.append(amenity.id)

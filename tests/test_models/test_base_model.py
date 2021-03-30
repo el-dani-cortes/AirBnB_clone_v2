@@ -56,7 +56,7 @@ class test_basemodel(unittest.TestCase):
             j = json.load(f)
             self.assertEqual(j[key], i.to_dict())
 
-    @unittest.skip("This test is not working well")
+    # @unittest.skip("This test is not working well")
     def test_str(self):
         """ """
         i = self.value()
