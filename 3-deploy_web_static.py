@@ -14,11 +14,5 @@ def deploy():
     """
     Creates and distributes an archive to the web servers
     """
-    abs_path = do_pack()
-    if abs_path is not None:
-        archive_path = abs_path.split("/")
-        archive_path = 'versions/' + abs_path[-1]
-        result = do_deploy(archive_path)
-        return result
-    else:
-        return False
+    archive_path = do_pack()
+    return do_deploy(archive_path)

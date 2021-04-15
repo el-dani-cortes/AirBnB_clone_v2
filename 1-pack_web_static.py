@@ -27,6 +27,6 @@ def do_pack():
     # Create the compressed file with fab method
     try:
         local('tar -cvzf {} web_static'.format(file_name))
-        return os.path.abspath(file_name)
+        return file_name
     except:
         return None
