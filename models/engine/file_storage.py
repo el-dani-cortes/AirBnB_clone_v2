@@ -61,3 +61,8 @@ class FileStorage:
         """Delete a object from __objects"""
         if obj is not None:
             del self.__objects[obj.__class__.__name__ + '.' + obj.id]
+
+    def close(self):
+        """Method for deserializing the JSON file to objects"""
+        self.reload()
+

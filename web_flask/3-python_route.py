@@ -2,7 +2,7 @@
 """
 My firts module using flask web framework
 """
-from flask import Flask
+from flask import Flask, escape
 
 app = Flask(__name__)
 
@@ -33,16 +33,17 @@ def c_programming(text):
     return 'C %s!' % text
 
 
+@app.route('/python', defaults={'text': None}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def python_programming(text='is cool'):
+def python_programming(text):
     """
     Function that routes to return a variable string,
-    acording a variable pass in the url.
+    acording a variable pass in the url and is optional.
     """
-    if bool(text) is False:
+    if text is None:
         return 'Python is cool'
     text = text.replace('_', ' ')
-    return 'Python %s!' % text
+    return 'Python %s' % escape(text)
 
 
 if __name__ == '__main__':

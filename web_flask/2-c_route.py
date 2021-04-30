@@ -30,7 +30,7 @@ def c_programming(text):
     acording a variable pass in the url.
     """
     text = text.replace('_', ' ')
-    return 'C %s!' % text
+    return 'C %s' % text
 
 
 if __name__ == '__main__':
