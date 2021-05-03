@@ -36,12 +36,11 @@ def states_and_cities_by_id(id):
 
 
 @app.teardown_appcontext
-def close_connection_db(all_states):
+def close_connection_db(exception):
     """
     Method to close connection with database
     """
-    if all_states is not None:
-        storage.close()
+    models.storage.close()
 
 
 if __name__ == '__main__':
