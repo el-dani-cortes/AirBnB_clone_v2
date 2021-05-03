@@ -16,8 +16,9 @@ def list_states():
     """
     states_dict = {}
     all_states = models.storage.all(State)
-    for key, value in all_states.items():
-        states_dict[value.name] = value
+    if bool(all_states) is True:
+        for key, value in all_states.items():
+            states_dict[value.name] = value
     return render_template('9-states.html', states_dict=states_dict)
 
 
