@@ -31,14 +31,14 @@ article {
 
 	height: 80px;	
 	width: 100%;
+	align-items: center;
 }
 
 .price_by_night {
 	display: flex;
 	justify-content: center;
 	align-self: flex-end;
-
-	position: absolute;
+	
 	right: 0;
 
 	line-height: 60px;
